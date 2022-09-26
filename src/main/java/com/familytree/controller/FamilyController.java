@@ -1,43 +1,42 @@
 package com.familytree.controller;
 
+import com.familytree.dto.AddMemberDto;
 import com.familytree.dto.PersonDto;
-import com.familytree.model.Person;
-import org.springframework.http.ResponseEntity;
+import com.familytree.service.FamilyService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class FamilyController {
 
-    @GetMapping("/person/{id}")
-    public ResponseEntity<PersonDto> getPersonById(@PathVariable("id") Long id) {
-        return null;
-    }
+    private final FamilyService familyService;
 
     @PostMapping("/person")
-    public void savePerson(@RequestBody Person person) {
-
+    public PersonDto savePerson(@RequestBody AddMemberDto personDto) {
+        return familyService.savePerson(personDto);
     }
 
     @GetMapping("/person/{id}/parents")
     public List<PersonDto> listAllParents(@PathVariable("id") Long id) {
-      return null;
+       return familyService.listAllParents(id);
     }
 
     @GetMapping("/person/{id}/childrens")
     public List<PersonDto> listAllChildrens(@PathVariable("id") Long id) {
-       return null;
+       return familyService.listAllChildrens(id);
     }
 
     @GetMapping("/person/{id}/descendants")
     public List<PersonDto> listAllDescendants(@PathVariable("id") Long id) {
-        return null;
+        return familyService.listAllDescendants(id);
     }
 
     @GetMapping("/person/{id}/ancestors")
     public List<PersonDto> listAllAncestors(@PathVariable("id") Long id) {
-        return null;
+        return familyService.listAllAncestors(id);
     }
 
 }
